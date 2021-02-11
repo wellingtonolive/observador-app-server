@@ -1,14 +1,13 @@
+const express = require('express')
+const userRouter = require('./routes/usuario')
 require('dotenv').config()
 require('./config/database/config')()
-const express = require('express')
+
 
 const app = express();
 
-app.use(express.json())
+app.use('/',userRouter)
 
-
-const userRouters = require('./routes/usuario')
-app.use("/api",userRouters)
 
 app.listen(Number(process.env.PORT), () =>{
     console.log(`Servidor rodando na porta ${process.env.PORT}`)

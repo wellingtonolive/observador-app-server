@@ -1,14 +1,16 @@
-const router = require('express').Router()
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const usuarioController = require('../controllers/UsuarioController')
 
-const User = require('../models/User')
+
+router.get('/usuarios', usuarioController.buscarTodos);
+
+router.post('/usuarios',usuarioController.signup);
 
 
-router.get("/", async (req,res) => {
-    return res.status(200).json("Resultado")
-})
-
+/*
 router.post("/signup", async (req, res) => {
     const { name, email, password } = req.body
 
@@ -62,5 +64,5 @@ router.post("/signup", async (req, res) => {
     }
 
 })
-
+*/
 module.exports = router
