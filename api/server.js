@@ -1,10 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const userRouter = require('./routes/usuario')
 require('dotenv').config()
 require('./config/database/config')()
 
-
 const app = express();
+
+app.use(bodyParser.json())
 
 app.use('/',userRouter)
 
