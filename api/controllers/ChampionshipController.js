@@ -7,7 +7,7 @@ module.exports = {
     // passport.authenticate("jwt", { session: false });
 
     try {
-      req.body.userID = req.user._id;
+      //req.body.userID = req.user._id;
       const result = await Championship.create(req.body);
       return res.status(201).json({ result });
     } catch (err) {

@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const userRouter = require("./routes/usuario");
 const championshipRouter = require("./routes/Championship");
 const gameRouter = require("./routes/Game");
+const athleteRouter = require("./routes/Athlete");
 require("dotenv").config();
 require("./config/database/config")();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/", userRouter);
 app.use("/", championshipRouter);
 app.use("/", gameRouter);
+app.use("/", athleteRouter);
 
 app.listen(Number(process.env.PORT), () => {
   console.log(`Servidor rodando na porta ${process.env.PORT}`);
