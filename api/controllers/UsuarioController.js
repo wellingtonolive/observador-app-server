@@ -16,6 +16,19 @@ module.exports = {
         }
     },
 
+    async detalharUsuario(req, res) {
+        const id = req.query.id
+        try {
+            const usuario = await User.findOne({ _id: id })
+            if (usuario) {
+                return res.status(200).json(usuario)
+            }
+            return res.status(400).json({ msg: 'Usuário Não encontrado' })
+        } catch (erro) {
+            return res.status(500).json(erro.message)
+        }
+    },
+
     async signup(req, res, next) {
         let erros = {}
         const { username, email, name, sobrenome, genero, password, nr_celular, dt_nascimento } = req.body
@@ -29,7 +42,7 @@ module.exports = {
         try {
             const salt = await bcrypt.genSalt(10)
             const passWordHash = await bcrypt.hash(password, salt)
-            const result = await User.create({ username, email, name, sobrenome, genero, passWordHash, nr_celular, dt_nascimento})
+            const result = await User.create({ username, email, name, sobrenome, genero, passWordHash, nr_celular, dt_nascimento })
             return res.status(201).json(result)
         }
         catch (erros) {
@@ -46,6 +59,10 @@ module.exports = {
                 )
             }
         }
+    },
+
+    login(req, res){
+        res.status(204).send();
     }
 
 }

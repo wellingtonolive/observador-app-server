@@ -10,6 +10,7 @@ require("./config/database/config")();
 const app = express();
 
 app.use(bodyParser.json());
+require("./config/autenticacao/Config_Passport")(app);
 app.use(cors());
 
 app.use("/", userRouter);
