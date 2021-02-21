@@ -51,8 +51,8 @@ typings/
 .npm
 
 #Variaveis de Ambientes
-.env
-.env-test
+#.env
+#.env-test
 # Optional eslint cache
 .eslintcache
 
