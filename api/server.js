@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 require("./config/autenticacao/Config_Passport")(app);
 app.use(cors());
 
+
 app.use("/", userRouter);
 app.use("/", championshipRouter);
 app.use("/", gameRouter);

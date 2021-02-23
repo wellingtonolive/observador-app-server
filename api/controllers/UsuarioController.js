@@ -5,8 +5,10 @@ const Validacoes = require('../models/Validacoes')
 const jwt = require('jsonwebtoken')
 
 function gerarToken(usuario){
+    const tempoEmMiliSegundos = 86400000;
     const payLoad = {
-        id: usuario.id
+        id: usuario.id,
+        expiraem: Date.now() + tempoEmMiliSegundos
     }
 
     const token = jwt.sign(payLoad, process.env.TOKEN_SIGN_SECRET)

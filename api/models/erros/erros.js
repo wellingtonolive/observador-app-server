@@ -5,6 +5,14 @@ class InvalidArgumentError extends Error {
     }
 }
 
+class ExpirationError extends Error{
+    constructor(mensagem){
+        super(mensagem)
+        this.name = 'ExpirationError'
+    }
+}
+
 module.exports = {
-    InvalidArgumentError : InvalidArgumentError
+    InvalidArgumentError : InvalidArgumentError,
+    ExpirationError: ExpirationError
 }

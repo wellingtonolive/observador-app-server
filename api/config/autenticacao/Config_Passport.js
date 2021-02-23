@@ -5,6 +5,7 @@ const LocalSrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy
 const Usuario = require('../../models/User')
 const { InvalidArgumentError } = require('../../models/erros/erros')
+const { ExpirationError } = require('../../models/erros/erros')
 
 
 
@@ -20,6 +21,13 @@ async function verificarSenha(senha, senhaHash) {
         throw new InvalidArgumentError('Senha Inválida')
     }
 }
+
+function verificaExpiracaoToken(tempoExpiracao){
+    if(tempoExpiracao > Date.now){
+        throw new ExpirationError('Token Expirado') 
+    }
+}
+
 
 function configurePassport(app) {
 
@@ -51,6 +59,7 @@ function configurePassport(app) {
                 try {
                     const payload = jwt.verify(token, process.env.TOKEN_SIGN_SECRET)
                     const usuario = await Usuario.findOne({ _id: payload.id })
+                    verificaExpiracaoToken(payload.tempoExpiracao)
                     done(null, usuario)
                 }
                 catch (erro) {
