@@ -1,23 +1,23 @@
 const passport = require('passport')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const LocalSrategy = require('passport-local').Strategy
+const BearerStrategy = require('passport-http-bearer').Strategy
 const Usuario = require('../../models/User')
+const { InvalidArgumentError } = require('../../models/erros/erros')
 
 
-function verificarUsuario(usuario,done) {
+
+function verificarUsuario(usuario) {
     if (!usuario) {
-        return done(null, false, {
-            message: "Esse e-mail ainda não foi registrado",
-        });
+        throw new InvalidArgumentError('E-mail Não Cadastrado')
     }
 }
 
-async function  verificarSenha(senha, senhaHash, done) {
+async function verificarSenha(senha, senhaHash) {
     const senhaValida = await bcrypt.compare(senha, senhaHash)
     if (!senhaValida) {
-        return done(null, false, {
-            message: "Senha Inválida"
-        });
+        throw new InvalidArgumentError('Senha Inválida')
     }
 }
 
@@ -34,15 +34,31 @@ function configurePassport(app) {
 
             try {
                 const usuario = await Usuario.findOne({ email: email })
-                verificarUsuario(usuario,done)
-                await verificarSenha(senha, usuario.passWordHash, done)
+                verificarUsuario(usuario)
+                await verificarSenha(senha, usuario.passWordHash)
 
-                return done(null, usuario)
+                done(null, usuario)
             }
             catch (erro) {
-                return done(erro)
+                done(erro)
             }
         })
+    )
+
+    passport.use(
+        new BearerStrategy(
+            async (token, done) => {
+                try {
+                    const payload = jwt.verify(token, process.env.TOKEN_SIGN_SECRET)
+                    const usuario = await Usuario.findOne({ _id: payload.id })
+                    done(null, usuario)
+                }
+                catch (erro) {
+                    done(erro)
+                }
+
+            }
+        )
     )
 }
 

@@ -2,6 +2,16 @@ const User = require('../models/User')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Validacoes = require('../models/Validacoes')
+const jwt = require('jsonwebtoken')
+
+function gerarToken(usuario){
+    const payLoad = {
+        id: usuario.id
+    }
+
+    const token = jwt.sign(payLoad, process.env.TOKEN_SIGN_SECRET)
+    return token
+}
 
 module.exports = {
 
@@ -62,6 +72,8 @@ module.exports = {
     },
 
     login(req, res){
+        const token = gerarToken(req.user)
+        res.set('Authorization', token)
         res.status(204).send();
     }
 
