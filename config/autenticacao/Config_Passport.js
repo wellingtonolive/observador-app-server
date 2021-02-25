@@ -22,12 +22,6 @@ async function verificarSenha(senha, senhaHash) {
     }
 }
 
-function verificaExpiracaoToken(tempoExpiracao){
-    if(tempoExpiracao > Date.now){
-        throw new ExpirationError('Token Expirado') 
-    }
-}
-
 
 function configurePassport(app) {
 

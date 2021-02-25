@@ -3,15 +3,15 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Validacoes = require('../models/Validacoes')
 const jwt = require('jsonwebtoken')
+const { EmailVerificacao } = require('../config/email')
 
-function gerarToken(usuario){
+function gerarToken(usuario) {
     const tempoEmMiliSegundos = 86400000;
     const payLoad = {
-        id: usuario.id,
-        expiraem: Date.now() + tempoEmMiliSegundos
+        id: usuario.id
     }
 
-    const token = jwt.sign(payLoad, process.env.TOKEN_SIGN_SECRET)
+    const token = jwt.sign(payLoad, process.env.TOKEN_SIGN_SECRET, { expiresIn: '1s' })
     return token
 }
 
@@ -54,8 +54,12 @@ module.exports = {
         try {
             const salt = await bcrypt.genSalt(10)
             const passWordHash = await bcrypt.hash(password, salt)
-            const result = await User.create({ username, email, name, sobrenome, genero, passWordHash, nr_celular, dt_nascimento })
-            return res.status(201).json(result)
+            const usuario = await User.create({ username, email, name, sobrenome, genero, passWordHash, nr_celular, dt_nascimento })
+            const endereco = `localhost:1234/usuario/verificaEmail/` + usuario.id
+            const emailVerificacao = new EmailVerificacao(usuario, endereco);
+            emailVerificacao.enviaEmail().catch(console.log)
+
+            return res.status(201).json(usuario)
         }
         catch (erros) {
             if (erros instanceof mongoose.Error.ValidationError) {
@@ -73,7 +77,7 @@ module.exports = {
         }
     },
 
-    login(req, res){
+    login(req, res) {
         const token = gerarToken(req.user)
         res.set('Authorization', token)
         res.status(204).send();
