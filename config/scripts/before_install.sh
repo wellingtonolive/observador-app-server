@@ -1,6 +1,9 @@
-cd /opt/app/observador-app-server
-
+cd /opt/app/
 echo "Cd realizado com Sucesso"
+
+sudo rm -rf /opt/app/*
+echo "Limpando repositorio"
+
 
 curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 
