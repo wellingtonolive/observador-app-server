@@ -10,27 +10,27 @@ files:
 permissions:
   - object: /
     pattern: "**"
-    owner: root
-    group: root
+    owner: ubuntu
+    group: ubuntu
 
 hooks:
 
   ApplicationStop:
     - location: config/scripts/app_stop.sh
       timeout: 300
-      runas: root
+      runas: ubuntu
   
   BeforeInstall:
     - location: config/scripts/before_install.sh
       timeout: 300
-      runas: root
+      runas: ubuntu
 
   AfterInstall:
     - location: config/scripts/aftet_install.sh
       timeout: 300
-      runas: root
+      runas: ubuntu
 
   ApplicationStart:
     - location: config/scripts/app_start.sh
       timeout: 300
-      runas: root
+      runas: ubuntu
