@@ -15,13 +15,13 @@ permissions:
 
 hooks:
 
-  BeforeInstall:
-    - location: config/scripts/before_install.sh
+  ApplicationStop:
+    - location: config/scripts/app_stop.sh
       timeout: 300
       runas: root
   
-  ApplicationStop:
-    - location: config/scripts/app_stop.sh
+  BeforeInstall:
+    - location: config/scripts/before_install.sh
       timeout: 300
       runas: root
 
