@@ -1,4 +1,6 @@
-cd /opt/app/
+#!/bin/bash
+
+cd /home/ubuntu/
 echo "Cd realizado com Sucesso"
 
 sudo rm -rf /opt/app/*

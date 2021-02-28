@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd /opt/app/observador-app-server/
 echo 'CD Realizado com Sucesso'
 
