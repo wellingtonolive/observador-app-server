@@ -3,7 +3,7 @@
 cd /home/ubuntu/
 echo "Cd realizado com Sucesso"
 
-sudo rm -rf /opt/app/*
+sudo rm -rf /home/ubuntu/*
 echo "Limpando repositorio"
 
 
