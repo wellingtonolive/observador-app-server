@@ -1,3 +1,5 @@
+#!/bin/bash
+echo 'Arquivo APP_STOP'
 cd /home/ubuntu
 echo 'Entrou na pasta'
 fuser -k 1234/tcp
