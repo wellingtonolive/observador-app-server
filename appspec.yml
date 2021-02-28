@@ -1,5 +1,3 @@
-# This is an appspec.yml template file for use with an EC2/On-Premises deployment in CodeDeploy.
-
 version: 0.0
 os: linux
 
