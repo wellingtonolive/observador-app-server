@@ -15,6 +15,7 @@ phases:
 artifacts:
   files:
     - package.json
+    - appspec.yml
     - config/scripts/**
     - controllers/**
     - models/**/*
