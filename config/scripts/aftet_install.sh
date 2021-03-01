@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 echo "Limpando Pasta do Antigo Server"
 sudo rm -R /opt/app/
 echo "Colocando novos Arquivos"
