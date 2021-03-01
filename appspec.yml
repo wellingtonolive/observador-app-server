@@ -15,10 +15,10 @@ hooks:
       timeout: 300
       runas: ubuntu
   AfterInstall:
-    - location: config/scripts/aftet_install
+    - location: config/scripts/aftet_install.sh
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: config/scripts/app_start
+    - location: config/scripts/app_start.sh
       timeout: 300
       runas: ubuntu
