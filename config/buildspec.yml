@@ -16,7 +16,7 @@ artifacts:
   files:
     - package.json
     - appspec.yml
-    - config/scripts/**
+    - config/**/**
     - controllers/**
     - models/**/*
     - routes/**
