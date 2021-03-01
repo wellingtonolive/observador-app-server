@@ -16,7 +16,7 @@ hooks:
   ApplicationStop:
     - location: config/scripts/app_stop.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
   
   BeforeInstall:
     - location: config/scripts/before_install.sh
