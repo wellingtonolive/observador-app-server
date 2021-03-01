@@ -1,10 +1,8 @@
 version: 0.0
 os: linux
-
 files:
   - source: /
     destination: /home/ubuntu/api
-
 permissions:
   - object: /
     pattern: "**"
@@ -12,18 +10,15 @@ permissions:
     group: ubuntu
 
 hooks:
-
   BeforeInstall:
-    - location: config/scripts/before_install.sh
+    - location: config/scripts/before_install
       timeout: 300
       runas: ubuntu
-
   AfterInstall:
-    - location: config/scripts/aftet_install.sh
+    - location: config/scripts/aftet_install
       timeout: 300
       runas: root
-
   ApplicationStart:
-    - location: config/scripts/app_start.sh
+    - location: config/scripts/app_start
       timeout: 300
       runas: ubuntu
