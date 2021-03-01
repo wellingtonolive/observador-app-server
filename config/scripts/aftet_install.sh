@@ -10,4 +10,7 @@ cd /opt/app/
 echo "Criando Pasta para API Observador"
 sudo mkdir observador
 echo "Colocando novos Arquivos"
+echo "Limpando diretório /opt/app/observador"
+sudo rm -r /opt/app/observador
+echo "Copiando Novos Arquivos"
 sudo cp -r /home/ubuntu/api/ /opt/app/observador
