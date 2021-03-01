@@ -14,3 +14,7 @@ echo "Limpando diretório /opt/app/observador"
 sudo rm -r /opt/app/observador
 echo "Copiando Novos Arquivos"
 sudo cp -r /home/ubuntu/api/ /opt/app/observador
+echo "Abrindo Diretório do Projeto"
+cd /opt/app/observador
+echo "Instalando Dependências"
+sudo npm install
