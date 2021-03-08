@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"build"
+    "build": "build"
   },
   "repository": {
     "type": "git",
@@ -29,11 +29,11 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",
     "nodemailer": "^6.4.8",
+    "nodemon": "^2.0.7",
     "npm-build": "^0.0.1",
     "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
-    "passport-local": "^1.0.0",
-    "nodemon": "^2.0.7"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "@vercel/node": "^1.9.0",
