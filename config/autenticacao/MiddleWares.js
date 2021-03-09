@@ -29,7 +29,6 @@ module.exports = {
       "bearer",
       { session: false },
       (erro, usuario, info) => {
-        console.log(erro);
         if (erro && erro.name === "JsonWebTokenError") {
           return res.status(401).json({ erro: erro.message });
         }
