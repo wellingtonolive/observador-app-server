@@ -4,10 +4,8 @@ const passport = require("passport");
 
 module.exports = {
   async create(req, res) {
-    // passport.authenticate("jwt", { session: false });
-
     try {
-      //req.body.userID = req.user._id;
+      req.body.userID = req.user._id;
       const result = await Championship.create(req.body);
       return res.status(201).json({ result });
     } catch (err) {
@@ -18,8 +16,12 @@ module.exports = {
   async detail(req, res) {
     try {
       const { id } = req.params;
+      const user = req.user._id;
 
-      const championship = await Championship.findOne({ _id: id });
+      const championship = await Championship.findOne({
+        _id: id,
+        userID: user,
+      });
 
       if (championship) {
         return res.status(200).json(championship);
@@ -54,9 +56,11 @@ module.exports = {
     }
   },
   async championshipsList(req, res) {
+    const user = req.user._id;
+
     try {
       const championshipsList = await Championship.find(
-        {},
+        { userID: user },
         {
           _id: 1,
           name: 1,
