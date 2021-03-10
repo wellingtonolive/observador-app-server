@@ -8,6 +8,7 @@ const gameSchema = new Schema(
     category: { type: String },
     teamA: { type: String },
     teamB: { type: String },
+    userID: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     // Tira o __v da db

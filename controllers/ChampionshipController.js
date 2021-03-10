@@ -1,7 +1,5 @@
 const Championship = require("../models/Campeonato");
 
-const passport = require("passport");
-
 module.exports = {
   async create(req, res) {
     try {

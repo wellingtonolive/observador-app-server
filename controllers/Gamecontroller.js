@@ -3,6 +3,7 @@ const Game = require("../models/Game");
 module.exports = {
   async create(req, res) {
     try {
+      req.body.userID = req.user._id;
       const result = await Game.create(req.body);
       return res.status(201).json({ result });
     } catch (err) {
@@ -13,8 +14,9 @@ module.exports = {
   async detail(req, res) {
     try {
       const { id } = req.params;
+      const user = req.user._id;
 
-      const game = await Game.findOne({ _id: id });
+      const game = await Game.findOne({ _id: id, userID: user });
 
       if (game) {
         return res.status(200).json(game);
@@ -47,8 +49,12 @@ module.exports = {
   async gameList(req, res) {
     try {
       const { id } = req.params;
+      const user = req.user._id;
 
-      const gameList = await Game.find({ idChampionship: id }, {});
+      const gameList = await Game.find(
+        { idChampionship: id, userID: user },
+        {}
+      );
       return res.status(200).json(gameList);
     } catch (err) {
       console.error(err);
