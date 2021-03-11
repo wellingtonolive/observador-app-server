@@ -29,18 +29,18 @@ module.exports = {
       "bearer",
       { session: false },
       (erro, usuario, info) => {
+        if (erro && erro.name === "TokenExpiredError") {
+          res
+            .status(410)
+            .json({ erro: erro.message, expiradoEm: erro.expiredAt });
+        }
+
         if (erro && erro.name === "JsonWebTokenError") {
           return res.status(401).json({ erro: erro.message });
         }
 
         if (erro && erro.name === "ExpirationError") {
           return res.status(401).json({ erro: erro.message });
-        }
-
-        if (erro && erro.name === "TokenExpiredError") {
-          res
-            .status(401)
-            .json({ erro: erro.message, expiradoEm: erro.expiredAt });
         }
 
         if (!usuario) {

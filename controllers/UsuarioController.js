@@ -113,4 +113,21 @@ module.exports = {
 
     return res.status(200).json({ user: userObj, token });
   },
+
+  async verifyToken(req, res) {
+    const user = req.user._id;
+    try {
+      const championshipsList = await Championship.find(
+        { userID: user },
+        {
+          _id: 1,
+          name: 1,
+        }
+      );
+      return res.status(200).json(championshipsList);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ msg: err });
+    }
+  },
 };
