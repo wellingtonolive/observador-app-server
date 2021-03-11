@@ -27,7 +27,7 @@ module.exports = {
             erros.genero = 'Gênero é obrigatório'
         }
 
-        if (typeof campos.nr_celular !== 'number') {
+        if (typeof campos.nr_celular !== 'string') {
             erros.nr_celular = 'Formato Inválido informado para o nr_celular'
         }
 
