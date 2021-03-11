@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/wellingtonolive/observador-app-server#readme",
   "dependencies": {
+    "aws-sdk": "^2.861.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "build": "^0.1.4",
@@ -29,6 +30,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "nodemailer": "^6.4.8",
     "nodemon": "^2.0.7",
     "npm-build": "^0.0.1",
