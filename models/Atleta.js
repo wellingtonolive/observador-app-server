@@ -18,6 +18,7 @@ const athleteSchema = new Schema(
     mobility: { type: String },
     finalization: { type: String },
     comentary: { type: String },
+    userID: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     // Tira o __v da db

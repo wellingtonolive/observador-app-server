@@ -3,7 +3,7 @@ const Athlete = require("../models/Atleta");
 module.exports = {
   async create(req, res) {
     try {
-      //req.body.userID = req.user._id;
+      req.body.userID = req.user._id;
       const result = await Athlete.create(req.body);
       return res.status(201).json({ result });
     } catch (err) {
@@ -14,8 +14,9 @@ module.exports = {
   async detail(req, res) {
     try {
       const { id } = req.params;
+      const user = req.user._id;
 
-      const athlete = await Athlete.findOne({ _id: id });
+      const athlete = await Athlete.findOne({ _id: id, userID: user });
 
       if (athlete) {
         return res.status(200).json(athlete);
@@ -48,8 +49,9 @@ module.exports = {
   async athleteList(req, res) {
     try {
       const { id } = req.params;
+      const user = req.user._id;
 
-      const athleteList = await Athlete.find({ idGame: id }, {});
+      const athleteList = await Athlete.find({ idGame: id, userID: user }, {});
       return res.status(200).json(athleteList);
     } catch (err) {
       console.error(err);
