@@ -17,9 +17,10 @@ router.post(
   MiddleWaresAutenticacao.local,
   usuarioController.login
 );
+
 router.get(
   "/usuario/verifytoken",
-  MiddleWaresAutenticacao.local,
+  MiddleWaresAutenticacao.bearer,
   usuarioController.verifyToken
 );
 
