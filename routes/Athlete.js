@@ -1,12 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const AthleteController = require("../controllers/AthleteController");
+const MiddleWaresAutenticacao = require("../config/autenticacao/MiddleWares");
 
-router.post("/athlete", AthleteController.create);
-router.get("/athlete/:id", AthleteController.detail);
-router.patch("/athlete/:id", AthleteController.edition);
-router.delete("/athlete/:id", AthleteController.delete);
+router.post(
+  "/athlete",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.create
+);
+router.get(
+  "/athlete/:id",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.detail
+);
+router.patch(
+  "/athlete/:id",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.edition
+);
+router.delete(
+  "/athlete/:id",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.delete
+);
 
-router.get("/athletes/:id", AthleteController.athleteList);
+router.get(
+  "/athletes/:id",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.athleteList
+);
 
 module.exports = router;

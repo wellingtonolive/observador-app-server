@@ -13,7 +13,7 @@ function gerarToken(usuario) {
   };
 
   const token = jwt.sign(payLoad, process.env.TOKEN_SIGN_SECRET, {
-    expiresIn: "6h",
+    //expiresIn: "6h",
   });
   return token;
 }
