@@ -30,8 +30,8 @@ module.exports = {
       { session: false },
       (erro, usuario, info) => {
         if (erro && erro.name === "TokenExpiredError") {
-          res
-            .status(410)
+          return res
+            .status(401)
             .json({ erro: erro.message, expiradoEm: erro.expiredAt });
         }
 
