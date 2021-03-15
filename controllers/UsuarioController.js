@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const Validacoes = require("../models/Validacoes");
 const jwt = require("jsonwebtoken");
 const { EmailVerificacao } = require("../config/email");
+const Championship = require("../models/Campeonato");
 
 function gerarToken(usuario) {
   const tempoEmMiliSegundos = 86400000;
@@ -12,7 +13,7 @@ function gerarToken(usuario) {
   };
 
   const token = jwt.sign(payLoad, process.env.TOKEN_SIGN_SECRET, {
-    expiresIn: "6h",
+    //expiresIn: "6h",
   });
   return token;
 }
