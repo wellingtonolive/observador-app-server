@@ -4,7 +4,7 @@ const athleteSchema = new Schema(
   {
     idGame: { type: Schema.Types.ObjectId, ref: "Game" },
     idChampionship: { type: Schema.Types.ObjectId, ref: "Campeonato" },
-    pictture: { type: String },
+    picture: { type: String },
     name: { type: String },
     year: { type: Number },
     birthDate: { type: Date },
