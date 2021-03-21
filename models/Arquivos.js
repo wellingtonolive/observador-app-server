@@ -11,6 +11,7 @@ const ArquivoSchema = new mongoose.Schema({
     size: Number,
     key: String,
     url: String,
+    objectIdReference: Schema.Types.ObjectId,
     createdAt: {
         type: Date,
         default: Date.now,
