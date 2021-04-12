@@ -9,6 +9,8 @@ router.post(
   multer(multerConfig).single("file"),
   arquivoController.salvar
 );
-router.delete("/arquivos:id", arquivoController.apagar);
+router.delete("/arquivos/:id", arquivoController.apagar);
+
+router.get("/generate-pdf/:id", arquivoController.dpf);
 
 module.exports = router;
