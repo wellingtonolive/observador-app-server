@@ -1,4 +1,5 @@
 const Game = require("../models/Game");
+const Atleta = require("../models/Atleta");
 
 module.exports = {
   async create(req, res) {
@@ -65,7 +66,8 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const game = await Game.deleteOne({ _id: id });
+      const respDelGame = await Game.deleteOne({ _id: id });
+      const respDelAthletes = await Atleta.deleteMany({ idGame: id });
 
       return res.status(200).json({});
     } catch (err) {
