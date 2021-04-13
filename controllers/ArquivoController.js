@@ -79,9 +79,9 @@ module.exports = {
         tempdate.toTimeString().split(" ")[0].split(":").splice(0, 2).join(":")
       );
     }
-    try {
-      const { id } = req.params;
+    const { id } = req.params;
 
+    try {
       const respAthlete = await Atleta.findOne({ _id: id });
       const respGame = await Game.findOne({ _id: respAthlete.idGame });
       const respChampionship = await Campeonato.findOne({
@@ -143,10 +143,16 @@ module.exports = {
 
           fs.readFile(tempFile, function (err, data) {
             response.contentType("application/pdf");
-            //response.contentDisposition("teste.pdf", "attachment");
-            response.set("content-disposition", "attachment");
+            response.set("Content-Disposition", "attachment");
             response.send(data);
-            console.log("enviou", data);
+          });
+
+          console.log(res.filename);
+          const path = res.filename;
+
+          fs.unlink(path, (err) => {
+            if (err) throw err;
+            console.log("path/file.txt was deleted");
           });
         })
         .catch((error) => {
