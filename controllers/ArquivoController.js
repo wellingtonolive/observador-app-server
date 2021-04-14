@@ -50,7 +50,7 @@ module.exports = {
   },
 
   async dpf(req, response) {
-    function dateNow(date, dayMonth) {
+    function dateNow(date, dayMonth, getDate) {
       function twoDigit(number) {
         if (number < 10) {
           return "0" + number;
@@ -65,6 +65,17 @@ module.exports = {
           twoDigit(tempdate.getUTCDate()) +
           "/" +
           twoDigit(tempdate.getUTCMonth() + 1)
+        );
+      }
+
+      if (getDate) {
+        const tempdate = new Date(date);
+        return (
+          twoDigit(tempdate.getUTCDate()) +
+          "/" +
+          twoDigit(tempdate.getUTCMonth() + 1) +
+          "/" +
+          tempdate.getUTCFullYear()
         );
       }
 
@@ -94,7 +105,7 @@ module.exports = {
         _id: respAthlete.idChampionship,
         userID: req.user._id,
       });
-      //console.log(respAthlete);
+      console.log(respAthlete);
 
       const options = {
         format: "A4",
@@ -118,7 +129,6 @@ module.exports = {
       };
 
       const athlete = {
-        name: respAthlete?.name,
         gameName: respGame.gameName,
         gameCategory: respGame.category,
         gameDate: dateNow(respGame.dateGame, true),
@@ -129,6 +139,12 @@ module.exports = {
         championshipLocalization: respChampionship.localization,
         championshipResponsable: respChampionship.responsable,
         championshipDetail: respChampionship.details,
+        name: respAthlete?.name,
+        year: respAthlete?.year,
+        birthDate: dateNow(respAthlete?.birthDate, false, true),
+        team: respAthlete?.team,
+        skillLeg: respAthlete?.skillLeg,
+        shirtNumber: respAthlete?.shirtNumber,
         age:
           new Date().getFullYear() -
           (respAthlete?.year !== undefined
