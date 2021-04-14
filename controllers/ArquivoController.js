@@ -82,12 +82,19 @@ module.exports = {
     const { id } = req.params;
 
     try {
-      const respAthlete = await Atleta.findOne({ _id: id });
-      const respGame = await Game.findOne({ _id: respAthlete.idGame });
+      const respAthlete = await Atleta.findOne({
+        _id: id,
+        userID: req.user._id,
+      });
+      const respGame = await Game.findOne({
+        _id: respAthlete.idGame,
+        userID: req.user._id,
+      });
       const respChampionship = await Campeonato.findOne({
         _id: respAthlete.idChampionship,
+        userID: req.user._id,
       });
-      console.log(respAthlete);
+      //console.log(respAthlete);
 
       const options = {
         format: "A4",
@@ -151,12 +158,11 @@ module.exports = {
             response.send(data);
           });
 
-          console.log(res.filename);
           const path = res.filename;
 
           fs.unlink(path, (err) => {
             if (err) throw err;
-            console.log("path/file.txt was deleted");
+            console.log(`output-${id}.pdf was deleted`);
           });
         })
         .catch((error) => {

@@ -1,4 +1,7 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+const MiddleWaresAutenticacao = require("../config/autenticacao/MiddleWares");
+
 const multer = require("multer");
 const multerConfig = require("../config/multerConfig");
 const arquivoController = require("../controllers/ArquivoController");
@@ -11,6 +14,10 @@ router.post(
 );
 router.delete("/arquivos/:id", arquivoController.apagar);
 
-router.get("/generate-pdf/:id", arquivoController.dpf);
+router.get(
+  "/generate-pdf/:id",
+  MiddleWaresAutenticacao.bearer,
+  arquivoController.dpf
+);
 
 module.exports = router;
