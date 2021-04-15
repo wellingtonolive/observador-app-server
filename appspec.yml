@@ -16,7 +16,7 @@ hooks:
       runas: root
   AfterInstall:
     - location: config/scripts/aftet_install.sh
-      timeout: 300
+      timeout: 900
       runas: root
   ApplicationStart:
     - location: config/scripts/app_start.sh
