@@ -105,7 +105,7 @@ module.exports = {
         _id: respAthlete.idChampionship,
         userID: req.user._id,
       });
-      console.log(respAthlete);
+      //console.log(respAthlete);
 
       const options = {
         format: "A4",
@@ -159,7 +159,9 @@ module.exports = {
         type: "",
       };
 
-      pdf
+      let octet = "";
+
+      /*pdf
         .create(document, options)
         .then((res) => {
           var tempFile = res.filename;
@@ -169,7 +171,9 @@ module.exports = {
             //response.set("Content-Disposition", "attachment");
             //response.set("Content-Security-Policy", "default-src *");
             //response.set( "Content-Security-Policy", "default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' ; script-src 'self'" );
-            response.send(data);
+            //response.send(data);
+            octet = data;
+            console.log(tempFile);
           });
 
           const path = res.filename;
@@ -181,7 +185,8 @@ module.exports = {
         })
         .catch((error) => {
           console.error(error);
-        });
+        });*/
+      return response.status(200).json({ msg: octet });
     } catch (error) {
       console.error(error);
       return response.status(500).json(error);
