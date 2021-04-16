@@ -49,7 +49,7 @@ module.exports = {
     }
   },
 
-  async dpf(req, response) {
+  async dpf(req, res) {
     function dateNow(date, dayMonth, getDate) {
       function twoDigit(number) {
         if (number < 10) {
@@ -159,24 +159,16 @@ module.exports = {
         type: "",
       };
 
-      let octet = "";
-
-      /*pdf
+      pdf
         .create(document, options)
-        .then((res) => {
-          var tempFile = res.filename;
+        .then((resp) => {
+          var tempFile = resp.filename;
 
           fs.readFile(tempFile, function (err, data) {
-            //response.contentType("application/pdf");
-            //response.set("Content-Disposition", "attachment");
-            //response.set("Content-Security-Policy", "default-src *");
-            //response.set( "Content-Security-Policy", "default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' ; script-src 'self'" );
-            //response.send(data);
-            octet = data;
-            console.log(tempFile);
+            res.send(data);
           });
 
-          const path = res.filename;
+          const path = resp.filename;
 
           fs.unlink(path, (err) => {
             if (err) throw err;
@@ -185,11 +177,10 @@ module.exports = {
         })
         .catch((error) => {
           console.error(error);
-        });*/
-      return response.status(200).json({ msg: octet });
+        });
     } catch (error) {
       console.error(error);
-      return response.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
 };
