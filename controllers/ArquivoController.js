@@ -165,9 +165,9 @@ module.exports = {
           var tempFile = res.filename;
 
           fs.readFile(tempFile, function (err, data) {
-            response.contentType("application/pdf");
-            response.set("Content-Disposition", "attachment");
-            response.set("Content-Security-Policy", "default-src *");
+            //response.contentType("application/pdf");
+            //response.set("Content-Disposition", "attachment");
+            //response.set("Content-Security-Policy", "default-src *");
             //response.set( "Content-Security-Policy", "default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' ; script-src 'self'" );
             response.send(data);
           });

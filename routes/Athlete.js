@@ -30,4 +30,15 @@ router.get(
   AthleteController.athleteList
 );
 
+router.get(
+  "/athletepdfget/:id",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.getpdf
+);
+router.post(
+  "/athletepdfpost/:id",
+  MiddleWaresAutenticacao.bearer,
+  AthleteController.postdpf
+);
+
 module.exports = router;
