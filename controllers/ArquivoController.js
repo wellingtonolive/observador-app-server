@@ -16,20 +16,22 @@ module.exports = {
   },
 
   async salvar(req, res) {
+    console.log(req.body);
     try {
-      console.log(req.body);
-      console.log(req.file);
-      /*const { originalname: name, size, key, location: url = "" } = req.file;
-            console.log(location)
-            console.log(url)
-            const arquivo = await Arquivo.create({
-                name,
-                size,
-                key,
-                url
-            });
+      //console.log(req.body);
+      //console.log(req.file);
+      const { originalname: name, size, key, location: url = "" } = req.body;
+      console.log(name, size, key, url);
 
-            return res.status(200).json(arquivo);*/
+      const arquivo = await Arquivo.create({
+        name,
+        size,
+        key,
+        url,
+      });
+
+      return res.status(200).json(arquivo);
+      return res.status(200).json({ msg: "foi" });
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -37,8 +39,9 @@ module.exports = {
   },
 
   async apagar(req, res) {
+    console.log(req.params.id);
     try {
-      const arquivo = await Arquivos.findById(req.params.id);
+      const arquivo = await Arquivo.findById(req.params.id);
       arquivo.remove();
       return res.status(200);
     } catch (error) {
