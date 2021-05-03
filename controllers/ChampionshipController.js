@@ -1,4 +1,6 @@
 const Championship = require("../models/Campeonato");
+const Game = require("../models/Game");
+const Atleta = require("../models/Atleta");
 
 module.exports = {
   async create(req, res) {
@@ -74,7 +76,9 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const championship = await Championship.deleteOne({ _id: id });
+      const respDelChampionship = await Championship.deleteOne({ _id: id });
+      const respDelGames = await Game.deleteMany({ idChampionship: id });
+      const respDelAthletes = await Atleta.deleteMany({ idChampionship: id });
 
       return res.status(200).json({});
     } catch (err) {

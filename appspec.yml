@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/api/app/
+    destination: /home/ubuntu/api
 permissions:
   - object: /
     pattern: "**"
@@ -16,7 +16,7 @@ hooks:
       runas: root
   AfterInstall:
     - location: config/scripts/aftet_install.sh
-      timeout: 300
+      timeout: 1300
       runas: root
   ApplicationStart:
     - location: config/scripts/app_start.sh

@@ -69,8 +69,8 @@ module.exports = {
       erros
     );
 
-    if (Object.keys(erros).length) {
-      return res.status(400).json({ erros });
+    if (Object.keys(erros).length > 0) {
+      return res.status(406).json({ erros });
     }
 
     try {
@@ -93,6 +93,7 @@ module.exports = {
       return res.status(201).json(usuario);
     } catch (erros) {
       if (erros instanceof mongoose.Error.ValidationError) {
+        console.log(erros);
         res.status(400).json({
           error: erros.message,
         });

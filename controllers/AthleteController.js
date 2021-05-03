@@ -1,4 +1,9 @@
 const Athlete = require("../models/Atleta");
+const Game = require("../models/Game");
+const Campeonato = require("../models/Campeonato");
+const pdf = require("pdf-creator-node");
+const fs = require("fs");
+const html = fs.readFileSync("./config/templatePdf.html", "utf8");
 
 module.exports = {
   async create(req, res) {
