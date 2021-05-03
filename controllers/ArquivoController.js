@@ -154,20 +154,20 @@ module.exports = {
         birthDate: dateNow(respAthlete?.birthDate, false, true),
         team: respAthlete?.team,
         skillLeg: respAthlete?.skillLeg,
-        shirtNumber: respAthlete?.shirtNumber,
+        shirtNumber: restpAhlete?.shirtNumber,
         age:
           new Date().getFullYear() -
           (respAthlete?.year !== undefined
             ? respAthlete.year
             : new Date().getFullYear()),
-        shortPass: fundaments[respAthlete?.shortPass || 0],
-        longPass: fundaments[respAthlete?.longPass || 0],
-        header: fundaments[respAthlete?.header || 0],
-        position: fundaments[respAthlete?.position || 0],
-        velocity: fundaments[respAthlete?.velocity || 0],
-        reactionPower: fundaments[respAthlete?.reactionPower || 0],
-        mobility: fundaments[respAthlete?.mobility || 0],
-        finalization: fundaments[respAthlete?.finalization || 0],
+        shortPass: fundaments[restpAhlete?.shortPass || 25],
+        longPass: fundaments[restpAhlete?.longPass || 25],
+        header: fundaments[restpAhlete?.header || 25],
+        position: fundaments[restpAhlete?.position || 25],
+        velocity: fundaments[restpAhlete?.velocity || 25],
+        reactionPower: fundaments[restpAhlete?.reactionPower || 25],
+        mobility: fundaments[restpAhlete?.mobility || 25],
+        finalization: fundaments[restpAhlete?.finalization || 25],
       };
 
       const document = {
