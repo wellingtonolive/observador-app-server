@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <mate charest="utf-8" />
-    <title>Hello world!</title>
+    <meta charest="utf-8" />
+
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
+
+    <style>
+      #container {
+        margin: 0;
+        padding: 0;
+        width: 60vw;
+        height: 60vh;
+      }
+    </style>
   </head>
   <body>
     <h3>{{this.name}}</h3>
@@ -26,19 +37,47 @@
       <li>Equipe do atleta: {{this.team}}</li>
       <li>Perna de maior habilidade: {{this.skillLeg}}</li>
       <li>Número da camisa: {{this.shirtNumber}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
-      <li>Age: {{this.age}}</li>
+      <li>Perna de maior habilidade: {{this.skillLeg}}</li>
       <br />
     </ul>
+    <div id="container"></div>
+
+    <script>
+      anychart.onDocumentReady(function () {
+        // drawing our chart goes here
+        var data1 = [
+          { x: "Passe curto", value: 1 },
+          { x: "Passe longo", value: 2 },
+          { x: "Cabeceio", value: 1 },
+          { x: "Posicionamento", value: 2 },
+          { x: "Velocidade", value: 3 },
+          { x: "Poder de reação", value: 2 },
+          { x: "Mobilidade", value: 0 },
+          { x: "Finalização", value: 2 },
+        ];
+
+        // create radar chart
+        var chart = anychart.radar();
+
+        // set chart title
+        chart.title("Fundamentos do jogador").legend(true);
+
+        // set chart yScale settings
+        chart.yScale().minimum(0).maximum(3).ticks({ interval: 1 });
+
+        // create first series
+        chart.area(data1).name("Atleta").fill("black", 0.5).stroke("black");
+        chart.area().name("0/Ruim");
+        chart.area().name("1/Normal");
+        chart.area().name("2/Bom");
+        chart.area().name("3/Acima da média");
+
+        // set container id for the chart
+        chart.container("container");
+
+        // initiate chart drawing
+        chart.draw();
+      });
+    </script>
   </body>
 </html>
