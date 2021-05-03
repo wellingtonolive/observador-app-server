@@ -10,8 +10,8 @@
       #container {
         margin: 0;
         padding: 0;
-        width: 60vw;
-        height: 60vh;
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
@@ -41,19 +41,31 @@
       <br />
     </ul>
     <div id="container"></div>
+    <div id="demo"></div>
 
     <script>
+      const atlt = this;
+
+      var person = {
+        short: atlt.shortPass,
+        this: atlt,
+        fullName: function () {
+          return this.short + " " + this.this;
+        },
+      };
+      document.getElementById("demo").innerHTML = person.fullName();
+
       anychart.onDocumentReady(function () {
         // drawing our chart goes here
         var data1 = [
-          { x: "Passe curto", value: 1 },
-          { x: "Passe longo", value: 2 },
-          { x: "Cabeceio", value: 1 },
-          { x: "Posicionamento", value: 2 },
-          { x: "Velocidade", value: 3 },
-          { x: "Poder de reação", value: 2 },
-          { x: "Mobilidade", value: 0 },
-          { x: "Finalização", value: 2 },
+          { x: "Passe curto", value: atlt.shortPass || 2 },
+          { x: "Passe longo", value: atlt.longPass || 2 },
+          { x: "Cabeceio", value: atlt.header || 2 },
+          { x: "Posicionamento", value: atlt.position || 2 },
+          { x: "Velocidade", value: atlt.velocity || 2 },
+          { x: "Poder de reação", value: atlt.reactionPower || 2 },
+          { x: "Mobilidade", value: atlt.mobility || 2 },
+          { x: "Finalização", value: atlt.finalization || 2 },
         ];
 
         // create radar chart
@@ -66,11 +78,11 @@
         chart.yScale().minimum(0).maximum(3).ticks({ interval: 1 });
 
         // create first series
-        chart.area(data1).name("Atleta").fill("black", 0.5).stroke("black");
         chart.area().name("0/Ruim");
         chart.area().name("1/Normal");
         chart.area().name("2/Bom");
         chart.area().name("3/Acima da média");
+        chart.area(data1).name("Atleta").fill("black", 0.5).stroke("black");
 
         // set container id for the chart
         chart.container("container");
